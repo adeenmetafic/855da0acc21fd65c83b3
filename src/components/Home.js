@@ -25,14 +25,19 @@ const Home = ({setCountryDetails}) => {
     <Container>
       <Header />
       <Content>
-        <Item rounded>
+        <Item rounded style={{marginTop: 36}}>
           <Input
             placeholder="Enter country"
             value={country}
             onChangeText={setCountry}
+            style={{textAlign: 'center'}}
           />
         </Item>
-        <Button rounded disabled={!country} onPress={submitForm}>
+        <Button
+          rounded
+          disabled={!country}
+          onPress={submitForm}
+          style={{alignSelf: 'center', marginTop: 18}}>
           <Text>Submit</Text>
         </Button>
       </Content>

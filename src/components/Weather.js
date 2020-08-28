@@ -10,7 +10,7 @@ import {
   Spinner,
   Thumbnail,
 } from 'native-base';
-import {BackHandler} from 'react-native';
+import {BackHandler, StyleSheet} from 'react-native';
 import {WEATHER_API_KEY} from '@env';
 
 const Country = ({capital, setCapital}) => {
@@ -31,7 +31,7 @@ const Country = ({capital, setCapital}) => {
   });
 
   const fetchWeather = () => {
-    const url = `https://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${capital}`;
+    const url = `http://api.weatherstack.com/current?access_key=${WEATHER_API_KEY}&query=${capital}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -60,27 +60,38 @@ const Country = ({capital, setCapital}) => {
       <Header />
       <Content>
         <List>
-          <ListItem>
+          <ListItem style={styles.center}>
             <Text>Temperature: {weather.temperature}</Text>
           </ListItem>
-          <ListItem>
+          <ListItem style={styles.center}>
             {weather.weather_icons.map((icon, key) => (
               <Thumbnail source={{uri: icon}} height={200} width={200} />
             ))}
           </ListItem>
-          <ListItem>
+          <ListItem style={styles.center}>
             <Text>Wind Speed: {weather.wind_speed}</Text>
           </ListItem>
-          <ListItem>
+          <ListItem style={styles.center}>
             <Text>Precipitation: {weather.precip}</Text>
           </ListItem>
         </List>
-        <Button onPress={goBack} rounded>
+        <Button onPress={goBack} rounded style={styles.button}>
           <Text>Back</Text>
         </Button>
       </Content>
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  center: {
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    alignSelf: 'center',
+    marginTop: 12,
+  },
+});
 
 export default Country;
